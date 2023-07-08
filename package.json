@@ -1,0 +1,18 @@
+{
+  "name": "project",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "nx start @project/server",
+    "build": "nx run-many --target=build --all",
+    "test": "nx run-many --target=test --all"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "nx": "16.4.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
