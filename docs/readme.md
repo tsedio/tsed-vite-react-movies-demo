@@ -245,7 +245,7 @@ There are three ways to fetch the movies list:
 2) Using the SSR (Server Side Rendering) mode
 3) Using the CSR (Client Side Rendering) mode
 
-In this tutorial, we will use the SSG mode then the SSR mode and explain the differences between them. We won't use the CSR mode because it's not the purpose of this tutorial.
+> In this tutorial, we will use the SSG mode then the SSR mode and explain the differences between them. We won't use the CSR mode because it's not the purpose of this tutorial.
 
 ### SSG mode
 
@@ -304,8 +304,7 @@ export interface Movie {
 }
 ```
 
-We will use this interface to type the `movies` data and share it between the server and the browser code.
-
+> We will use this interface to type the `movies` data and share it between the server and the browser code.
 
 Now, we have to create the `packages/app/src/pages/movies/index.page.tsx` file and add the following code:
 
@@ -336,7 +335,7 @@ export function Page({movies, generatedAt}: PageContext & { movies: Movie[], gen
 }
 ```
 
-We use tailwindcss to style the page. You can use any other CSS framework. Add the following code to the `packages/app/src/renderer/_default.page.server.tsx` file to import the tailwindcss stylesheet:
+We use tailwindcss to style the page. Add the following code to the `packages/app/src/renderer/_default.page.server.tsx` file to import the tailwindcss stylesheet:
 
 ```html
 <html lang="en">
@@ -349,7 +348,7 @@ We use tailwindcss to style the page. You can use any other CSS framework. Add t
     <title>${title}</title>
 ```
 
-Now, we have to add the `movies` page to the navbar. Edit the `packages/app/src/renderer/PageShell.tsx` file and add the following code:
+We must also to update the `movies` page to the navbar to make our navigation in our website more comfortable. Edit the `packages/app/src/renderer/PageShell.tsx` file and add the following code:
 
 ```html
 <Link className="navitem" href="/">
@@ -363,8 +362,7 @@ Now, we have to add the `movies` page to the navbar. Edit the `packages/app/src/
 </Link>
 ```
 
-Now the last step is to enable the SSG mode when you run `npm run build` command. To do that, edit the `packages/app/vite.config.ts` file and add the following code:
-
+Now the last step is to enable the SSG mode when we run `npm run build` command. To do that, edit the `packages/app/vite.config.ts` file and enable the `prerender` options:
 ```typescript
 import react from "@vitejs/plugin-react";
 import ssr from "vite-plugin-ssr/plugin";
@@ -382,22 +380,22 @@ const config: UserConfig = {
 export default config;
 ```
 
-Now, you can run the following command:
+Now, we can run the following command:
 
 ```bash
 yarn build
 yarn start:prod
 ```
 
-If you check in the `packages/app/dist` folder, you see that the Vite plugin has generated the `movies/index.html` file:
+If we check in the `packages/app/dist` folder, we see that the Vite plugin has generated the `movies/index.html` file:
 
 [![movies list](assets/vite-ssg-movies-prerenderer.png)](assets/vite-ssg-movies-prerenderer.png)
 
-Now, if you open our app in the browser and go to the `/movies` page, you will see the following page:
+Now, if we open our app in the browser and go to the `/movies` page, we will see the following page:
 
 [![movies list](assets/vite-ssg-movies-list.png)](assets/vite-ssg-movies-list.png)
 
-The import point is the date displayed on the page. It's the date when the page was generated. If you refresh the page, you will see the same date. It means that the page is static and generated at build time while the build command isn't ran again.
+The import point is the date displayed on the page. It's the date when the page was generated. If we refresh the page, we'll see the same date. It means that the page is static and generated at build time while the build command isn't ran again.
 
 ### SSR mode
 
@@ -479,21 +477,29 @@ npm run start:prod
 
 [![movies list](assets/vite-ssr-movies-list.png)](assets/vite-ssr-movies-list.png)
 
-Now, if your refresh the page, you will see that the date is updated. It means that the page is generated on the runtime.
+In SSR mode the difference from SSG isn't perceptible, but if your refresh the page, we'll see that the date is updated. It means that the page is generated on the runtime.
+
+[![movies list](assets/vite-ssr-movies-dist.png)](assets/vite-ssr-movies-dist.png)
+
+We can see that the Vite plugin hasn't generated the `movies/index.html` file in the `packages/app/dist` folder.
 
 ## Conclusion
 
-In this article, we have seen how to use the Vite plugin to generate static pages and dynamic pages. 
-We have seen how to use the `prerender` option to generate static pages and how to use the SSR mode to generate dynamic pages.
+In this article, we have seen how to use the `vite-plugin-ssr` to generate static pages and dynamic pages using the **prerender** option provided by the plugin.
+This plugin is really complete and provides a lot of options to customize the generated pages. It covers most of the use cases you can have, and it has nothing to envy to [Next.js](https://nextjs.org/).
 
-The Vite plugin is a powerful plugin that can be used to generate static pages, dynamic pages, and even a full static website.
+> You can check the comparison between Next.js and Vite plugin [here](https://vite-plugin-ssr.com/comparison-with-nextjs).
 
-Coupled with Ts.ED you'll be able to create an awesome website with a great developer experience!
+His facility to use and his integration with server-side frameworks like Ts.ED was the main reason why I chose this plugin.
 
-You can find the full source code of this article on [Github](https://github.com/tsedio/tsed-vite-react-movies-demo).
+Coupled with Ts.ED to build a Rest API, you'll be able to create an awesome website that combines the power of the static pages and the dynamic pages
+and the power of the server-side framework. All of that! With a single codebase.
 
 ## Resources
+
+You can find the full source code of this article on [Github](https://github.com/tsedio/tsed-vite-react-movies-demo).
 
 - [Vite](https://vitejs.dev/)
 - [Vite SSR Plugin](https://vite-plugin-ssr.com/pre-rendering#ssg-vs-ssr)
 - [Ts.ED](https://tsed.io/tutorials/vite-plugin-ssr.html)
+- [OMDB API](http://www.omdbapi.com/)
