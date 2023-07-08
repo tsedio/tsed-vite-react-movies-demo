@@ -3,3 +3,6 @@
  */
 
 export * from "./IndexController";
+export * from "./movies/Movie";
+export * from "./movies/MovieMapper";
+export * from "./movies/MoviesController";
