@@ -4,6 +4,11 @@ import {Server} from "./Server";
 
 async function bootstrap() {
   try {
+    if (process.env.NODE_ENV === "production") {
+      // @ts-ignore
+      await import("@project/app/dist/server/importBuild.cjs");
+    }
+
     const platform = await PlatformExpress.bootstrap(Server);
     await platform.listen();
 
