@@ -33,6 +33,11 @@ Repository to demonstrate the use of the [vite-plugin-ssr](https://vite-plugin-s
 - Barrelsby
 - Nx
 
+## Docs
+
+- [Use Vite and Ts.ED to build your Website - (source)](./docs/README.md)
+- [Use Vite and Ts.ED to build your website - (medium article)](https://medium.com/@romainlenzotti/use-vite-and-ts-ed-to-build-your-website-84fb4c0d8079)
+
 ## Getting started
 
 > **Important!** Ts.ED requires Node >= 16, Express >= 4 and TypeScript >= 4.
