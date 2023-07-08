@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nx start @project/server",
     "build": "nx run-many --target=build --all",
+    "start:prod": "nx start:prod @project/server",
     "test": "nx run-many --target=test --all"
   },
   "private": true,
