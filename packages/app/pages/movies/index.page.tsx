@@ -5,7 +5,7 @@ export function Page({movies, generatedAt}: PageContext & { movies: Movie[], gen
   return (
     <>
       <h1 className="text-xl font-bold mb-2">Movies</h1>
-      <small className="text-gray-700 italic mb-5 block">This page was build at {generatedAt}</small>
+      <small className="text-gray-700 italic mb-5 block">This page was built {generatedAt}</small>
 
       <div className="grid gap-5 grid-cols-2">
         {

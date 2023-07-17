@@ -1,34 +1,37 @@
-As you now, Vite is an incredible front-end tooling, and we can say that who has a can revolutionize the developer experience,
-as it was with Webpack in its day.
+As you know, Vite is an incredible front-end tool that has revolutionized the developer experience, just like  Webpack did in its time.
 
 Vite is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
 
-- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) with [rich built-in features](https://vitejs.dev/guide/features.html) and [convenient goodies](https://vitejs.dev/guide/env-and-mode.html#modes) (e.g. hot module replacement and [TypeScript](https://vitejs.dev/guide/features.html#typescript) support) on top of [native ES Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) imports.
+- A development server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) with [rich built-in features](https://vitejs.dev/guide/features.html) and [convenient goodies](https://vitejs.dev/guide/env-and-mode.html#modes) (e.g. hot module replacement and [TypeScript](https://vitejs.dev/guide/features.html#typescript) support).
 - A [build command](https://vitejs.dev/guide/build.html) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
 
-But we can use it also for backend development as a Server Side Rendering (SSR) to render template from a Controller.
+We can also use it for backend development as a Server Side Rendering (SSR) to render templates from a Controller.
 
-In this article, we will see how to use Vite and `vite-plugin-ssr` with Ts.ED. For the front-end part, we will use React.js, but you can use any other framework like Vue.js, Svelte, etc...
+In this article, we will see how to use Vite and `vite-plugin-ssr` with Ts.ED. For the front-end part, we will use React.js, but you can use any other framework like Vue.js, Svelte, etc.
+In this article, we will see how to use Vite and `vite-plugin-ssr` with Ts.ED to build our movies' website. For the front-end part, we will use React.js, but you can use any other framework like Vue.js, Svelte, etc.
 
-## Step 1: Create the monorepo
+## Step 1: Create the mono-repository
 
-To create the monorepo, we will use [Nx](https://nx.dev/). Nx is a tool that optimizes the workflow around managing multi-package repositories with git and npm.
+To create the monorepo, we will use [Nx](https://nx.dev/). Nx is a tool that optimizes the workflow around management of multi-package repositories with git and npm.
 
 ```bash
 npx create-nx-workspace@latest tsed-vite-react-example --preset=npm
 ```
 
-The file structure should look like this:
+The file structure should looks like this:
+
+```bash
 package-based/
 ├── packages/
 ├── nx.json
 └── package.json
+```
 
 ## Step 2: Create the Ts.ED application
 
-The package folder where we host the server-side code will be located here `packages/server`.
+The package folder where we host the server-side code will be located at `packages/server`.
 
-Create a new `packages/server` folder and install the Ts.ED dependencies, using the CLI:
+Create a new `packages/server`. It will host the server-side code. Then, install the Ts.ED dependencies, using the CLI:
 
 ```bash
 npm install -g @tsed/cli
@@ -38,13 +41,11 @@ cd packages/server
 tsed init .
 ```
 
-For this tutorial, we’ll use Express and Swagger presets from the CLI. You can also add Jest, Eslint and Prettier! You
-should have the following presets configuration in the CLI prompt:
-Ts.ED CLI create project options:
+For this tutorial, we'll use Express and Swagger presets from the CLI. You can also add Jest, Eslint and Prettier! You should have the following selected presets in the CLI prompt
 
 [![Ts.ED CLI create project options](assets/vite-ssr-react-cli.png)](assets/vite-ssr-react-cli.png)
 
-Then, install the `@tsed/vite-ssr-plugin` package on `packages/server/package.json`:
+Then, install the `@tsed/vite-ssr-plugin` package in `packages/server/package.json`:
 
 ```bash
 npm install @tsed/vite-ssr-plugin --save
@@ -72,7 +73,7 @@ export default {
 };
 ```
 
-For the CommonJS env you have to add the following line in `packages/server/index.ts`:
+For the CommonJS environment you have to add the following lines in `packages/server/index.ts`:
 
 ```typescript
 import {$log} from "@tsed/common";
@@ -101,12 +102,14 @@ async function bootstrap() {
 bootstrap();
 ```
 
-This line resolve the issue with the CommonJS environment in production mode:
+
+This line resolves the issue with the CommonJS environment in production mode:
 
 ```
 [@brillout/vite-plugin-import-build@0.2.18][Wrong Usage] Cannot find server build.
 ```
 
+> Note: Ts.ED supports ESM environment, but the CLI doesn't currently generate it due to partial compatibility issues with some dev tools.
 
 Finally, edit `packages/server/src/config/index.ts` file and add the following configuration:
 
@@ -130,9 +133,9 @@ export const config: Partial<TsED.Configuration> = {
 
 ## Step 3: Create the Vite application
 
-The package folder where we host the client-side code will be located here `packages/app`.
+The package folder where we host the client-side code will be located at `packages/app`.
 
-Create a new `packages/app` folder and init the Vite app, using the CLI:
+Create a new `packages/app` folder and initialize the Vite app, using the CLI:
 
 ```bash
 mkdir packages/app
@@ -144,8 +147,7 @@ npm init vite-plugin-ssr@latest . -y --skip-git -- --boilerplate react-ts
 rm -rf server
 ```
 
-By default, the vite-plugin-ssr generator doesn't add a name on the app `package.json`. Because, we use a workspace,
-adding name will simplify our project configuration.
+By default, the vite-plugin-ssr generator doesn't add a name to the app `package.json`. Adding a name will simplify our project configuration since we are using a workspace.
 
 Edit the `packages/app/package.json` and add the following properties:
 
@@ -177,9 +179,9 @@ Then run `npm install` to update the workspace dependencies.
 
 ## Step 4: add task to start the application
 
-Our project is almost ready to start the development. We just need to add a task to start the application.
+We're almost ready to start the development of our project. We just need to add a task to start the application.
 
-On the root `./package.json` file, add the following script:
+On the root `./package.json` file, add the following scripts:
 
 ```json
 {
@@ -201,10 +203,10 @@ You should see the following output:
 
 [![server bootstrap](assets/vite-ssr-react-server-start.png)](assets/vite-ssr-react-server-start.png)
 
-> Note: If the `Start Vite Dev Server` isn't present, it means you've missed to import the `@tsed/vite-ssr-plugin`
+> Note: If the `Start Vite Dev Server` isn't present, it means you have forgotten to import the `@tsed/vite-ssr-plugin`
 > plugin on the `packages/server/Server.ts` file.
 
-You server by default listen the port 8083, so open in your favorite navigator this url http://0.0.0.0:8083.
+By default, your server listens on port 8083, so open your favorite browser and enter the following URL: http://0.0.0.0:8083.
 
 [![homepage](./vite-ssr-react-server-home-page.png)](./vite-ssr-react-server-home-page.png)
 
@@ -216,8 +218,8 @@ change the IndexController to expose our React home page.
 To display the Vite home page application we have to change the `IndexController` and tell Ts.ED to use the Vite engine
 to render the home page.
 
-Edit the `packages/server/src/controllers/IndexController.ts` file and replace the `@View("swagger.ejs")` decorator by
-the following one:
+Edit the `packages/server/src/controllers/IndexController.ts` file and file and replace the `@View("swagger.ejs")` 
+decorator by `@Vite()` like in the following example:
 
 ```typescript
 @Controller("/")
@@ -235,11 +237,13 @@ Now you should have the vite home page displayed:
 
 [![homepage vite](./vite-ssr-react-server-home-page.png)](./vite-ssr-react-server-home-page.png)
 
-## Step 6: Build a movies list
+Our application is ready for development!
 
-Now, we will build a simple movies list. We will use the [The Movie Database API](http://www.omdbapi.com/) to fetch the movies list.
+## Step 6: Build a list of movies
 
-There are three ways to fetch the movies list:
+Now, we will build a simple list of movies. We will use the [The Movie Database API](http://www.omdbapi.com/) to fetch data.
+
+There are three ways to display the list on our page, and the choice of the method will depend on the freshness of the data we expect. Here are these mods:
 
 1) Using the SSG (Static Site Generation) mode
 2) Using the SSR (Server Side Rendering) mode
@@ -249,9 +253,9 @@ There are three ways to fetch the movies list:
 
 ### SSG mode
 
-The SSG mode is the default mode used by the Vite plugin. It means that the Vite plugin will generate the HTML page on the compilation time.
+The SSG mode is the default mode used by the Vite plugin. It means that the Vite plugin will generate the HTML page during the compilation time.
 
-It's the best mode to use when you want to generate a static page. For instance, a blog, a documentation, a landing page, etc...
+It's the best method to use when you want to generate a static page, for instance, a blog, documentation, or a landing page.
 
 To use this mode, we have to create a new `packages/app/src/pages/movies/index.page.tsx` file and add the following code:
 
@@ -290,7 +294,8 @@ async function onBeforeRender() {
 
 > Note: Replace `xxxxx` by your own API key. You can get one on the [The Movie Database API](http://www.omdbapi.com/) website.
 
-This file will be executed on the server-side and will fetch the movies list. Then, the `onBeforeRender` function will be called to serialize the data and pass it to the browser.
+This file will be executed on the server-side and will fetch the movies list. 
+Then, the `onBeforeRender` function will be called to serialize the data and send it to the browser.
 
 Then, create the `packages/app/src/pages/movies/movies.interface.tsx` file and add the following code:
 
@@ -316,7 +321,7 @@ export function Page({movies, generatedAt}: PageContext & { movies: Movie[], gen
   return (
     <>
       <h1 className="text-xl font-bold mb-2">Movies</h1>
-      <small className="text-gray-700 italic mb-5 block">This page was build at {generatedAt}</small>
+      <small className="text-gray-700 italic mb-5 block">This page was built {generatedAt}</small>
 
       <div className="grid gap-5 grid-cols-2">
         {
@@ -348,7 +353,8 @@ We use tailwindcss to style the page. Add the following code to the `packages/ap
     <title>${title}</title>
 ```
 
-We must also to update the `movies` page to the navbar to make our navigation in our website more comfortable. Edit the `packages/app/src/renderer/PageShell.tsx` file and add the following code:
+We must also update the navbar to include the movies page in order to improve the navigation experience on our website.
+Edit the `packages/app/src/renderer/PageShell.tsx` file and add the following code:
 
 ```html
 <Link className="navitem" href="/">
@@ -395,17 +401,18 @@ Now, if we open our app in the browser and go to the `/movies` page, we will see
 
 [![movies list](assets/vite-ssg-movies-list.png)](assets/vite-ssg-movies-list.png)
 
-The import point is the date displayed on the page. It's the date when the page was generated. If we refresh the page, we'll see the same date. It means that the page is static and generated at build time while the build command isn't ran again.
+The important point is the date displayed on the page. It represents the date when the page was generated. 
+If we refresh the page, we'll see the same date. It means that the page is static, and it doesn't change unless the build command is run again.
 
 ### SSR mode
 
 The SSR mode is the mode used by the Vite plugin when the `prerender` option is set to `false` (default value).
 
-It means that the Vite plugin will generate the HTML page on the runtime. It's the best mode to use when you want to generate a dynamic page. For instance, a dashboard, a user profile, etc...
+It means that the Vite plugin will generate the HTML page at the runtime. It's the best method to use when you want to generate a dynamic page, for instance, a dashboard or a user profile.
 
 Based on our previous example, we just need to remove the `packages/app/pages/movies/index.page.server.tsx` file and the `prerender` option from the `packages/app/vite.config.ts` file.
 
-Then, we have to create the Ts.ED Controller to get the movies list. Create the `packages/server/src/controllers/pages/MoviesController.ts` file and add the following code:
+Then, we have to create the Ts.ED Controller to get the list of movies. Create the `packages/server/src/controllers/pages/MoviesController.ts` file and add the following code:
 
 ```typescript
 import {Controller} from "@tsed/common";
@@ -477,7 +484,8 @@ npm run start:prod
 
 [![movies list](assets/vite-ssr-movies-list.png)](assets/vite-ssr-movies-list.png)
 
-In SSR mode the difference from SSG isn't perceptible, but if your refresh the page, we'll see that the date is updated. It means that the page is generated on the runtime.
+In SSR mode the difference from SSG isn't perceptible, but if your refresh the page, we'll see that the date is updated. 
+It means that the page is generated at the runtime, rather than during the build process.
 
 [![movies list](assets/vite-ssr-movies-dist.png)](assets/vite-ssr-movies-dist.png)
 
@@ -485,14 +493,15 @@ We can see that the Vite plugin hasn't generated the `movies/index.html` file in
 
 ## Conclusion
 
-In this article, we have seen how to use the `vite-plugin-ssr` to generate static pages and dynamic pages using the **prerender** option provided by the plugin.
-This plugin is really complete and provides a lot of options to customize the generated pages. It covers most of the use cases you can have, and it has nothing to envy to [Next.js](https://nextjs.org/).
+In this article, we have seen how to use the `vite-plugin-ssr` to generate static pages and dynamic pages using the **prerender** 
+option provided by the plugin.
+This plugin is really complete and provides a lot of options to customize the generated pages. It covers most of the use cases you may encounter, and it has nothing to envy to [Next.js](https://nextjs.org/).
 
 > You can check the comparison between Next.js and Vite plugin [here](https://vite-plugin-ssr.com/comparison-with-nextjs).
 
-His facility to use and his integration with server-side frameworks like Ts.ED was the main reason why I chose this plugin.
+The ease of use and integration with server-side frameworks like Ts.ED were the main reasons why I chose this plugin.
 
-Coupled with Ts.ED to build a Rest API, you'll be able to create an awesome website that combines the power of the static pages and the dynamic pages
+When combined with Ts.ED to build a Rest API, you'll be able to create an awesome website that combines the power of both static and dynamic pages, 
 and the power of the server-side framework. All of that! With a single codebase.
 
 ## Resources
