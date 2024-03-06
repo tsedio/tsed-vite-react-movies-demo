@@ -1,6 +1,6 @@
 import {Controller} from "@tsed/common";
 import {Get, Returns} from "@tsed/schema";
-import {Vite} from "@tsed/vite-ssr-plugin";
+import {Vite} from "@tsed/vike";
 import {moviesMapper, ResponseMovie} from "./MovieMapper";
 
 @Controller("/movies")

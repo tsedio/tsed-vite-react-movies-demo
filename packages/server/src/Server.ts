@@ -4,7 +4,7 @@ import {PlatformApplication} from "@tsed/common";
 import "@tsed/platform-express"; // /!\ keep this import
 import "@tsed/ajv";
 import "@tsed/swagger";
-import "@tsed/vite-ssr-plugin";
+import "@tsed/vike";
 import {config} from "./config/index";
 import * as rest from "./controllers/rest/index";
 import * as pages from "./controllers/pages/index";

@@ -1,7 +1,7 @@
 import {Constant, Controller} from "@tsed/di";
 import {HeaderParams} from "@tsed/platform-params";
 import {SwaggerSettings} from "@tsed/swagger";
-import {Vite} from "@tsed/vite-ssr-plugin";
+import {Vite} from "@tsed/vike";
 import {Get, Hidden, Returns} from "@tsed/schema";
 
 @Hidden()
