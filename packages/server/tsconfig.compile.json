@@ -3,13 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
-    "moduleResolution": "node",
+    "moduleResolution": "nodeNext",
     "declaration": true,
     "noResolve": false,
     "preserveConstEnums": true,
     "sourceMap": true,
     "noEmit": false,
     "emitDeclarationOnly": false,
-    "inlineSources": true
+    "inlineSources": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
   }
 }
