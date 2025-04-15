@@ -6,11 +6,11 @@
   <h1>Ts.ED - Demo movies list</h1>
   <br />
   <div align="center">
-    <a href="https://cli.tsed.io/">Website</a>
+    <a href="https://tsed.dev/">Website</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-    <a href="https://cli.tsed.io/getting-started.html">Getting started</a>
+    <a href="https://tsed.dev/getting-started.html">Getting started</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-    <a href="https://api.tsed.io/rest/slack/tsedio/tsed">Slack</a>
+    <a href="https://api.tsed.dev/rest/slack/tsedio/tsed">Slack</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
     <a href="https://twitter.com/TsED_io">Twitter</a>
   </div>
